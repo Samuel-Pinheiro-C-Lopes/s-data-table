@@ -1,0 +1,23 @@
+<h1>Olá, mundo!</h1>
+
+<s-data-table
+  [dataSource]="dataSource"
+  [clazz]="clazz"
+  [defaultPropertyForCompositions]="'desc'"
+  [useExpand]="true"
+  [usePagination]="true"
+  [propertiesToIgnore]="['id']"
+  [expandContentProperty]="'html'"
+  [keyProperty]=""
+  (rowClickedEvent)="rowClicked($event)"
+>
+  <ng-template #expandContent let-element>
+    <h1>HELLO, THERE! element name: {{element["descricao"]}}</h1>
+    <div style="display: flex; justify-content: space-between; width: 100%;">    
+      <button style="border-radius: 5px;">TESTE 3</button>
+      <button style="border-radius: 10px;">TESTE 2</button>
+    </div>
+  </ng-template>
+</s-data-table>
+
+<button (click)="changeData()">change data</button>
