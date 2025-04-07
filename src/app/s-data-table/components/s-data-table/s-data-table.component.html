@@ -1,0 +1,96 @@
+<!-- container for all the table elements -->
+<section id="s-table-container">
+    <!-- determines the height and overflow -->
+    <section id="s-table-outer" [class.no-pagination]="!usePagination">
+        <!-- determines the table and how the rows and collumns are displayed -->
+        <table id="s-table">
+            <thead id="s-table-thead">
+                <tr>
+                    <!-- creates a table head for each property to be mapped -->
+                    @for (p of propertiesConf; track p) {
+                        <th>{{p.columnName}}</th>
+                    }
+                </tr>
+            </thead>
+            @if (data.length) {
+                <!-- one row for each element in the data provided -->
+                @for (element of data; track element) {
+                    <tr 
+                        class="s-table-tr-hoverable"
+                        [class.clickable]="useExpand || useClick"
+                        (click)="rowClicked(element)"
+                    >
+                        <!-- creates a table cell for each property to be mapped, 
+                         with the proper value associated -->
+                        @for (p of propertiesConf; track p) {
+                            @if (p.propertyType == "value") {
+                            <td>{{element[p.propertyName]}}</td>
+                            } @else if (p.propertyType == "object"){
+                                <td>{{element[p.propertyName][p.propertyForComposition ?? ""]}}</td>
+                            }
+                        }
+                    </tr>
+                    <tr>
+                        <!-- Content to be expanded on click, it needs 
+                         a corresponding key property to navigate the current 
+                         expandable element -->
+                        @if (keyProperty) { 
+                            <td [attr.keyValue]="element[keyProperty]" 
+                                [attr.colspan]="propertiesConf.length"
+                                class="s-table-td-full"
+                               
+                            >
+                                <!-- Renders the associated property html value and
+                                 template provided -->
+                                <div class="expandable-content">
+                                    <div [innerHTML]="expandendContent"></div>
+                                    <ng-content *ngTemplateOutlet="expandContent; context: { $implicit: element }"></ng-content>
+                                </div>
+                            </td>
+
+                        }
+                    </tr>
+                }
+            } 
+            @else {
+                <tr>
+                    <td 
+                        id="s-table-no-data"
+                        [attr.colspan]="propertiesConf.length" >
+                        <span>SEM REGISTROS</span>
+                    </td>
+                </tr>
+            }
+    
+        </table>
+    </section>
+    @if (usePagination) {
+        <section id="s-table-pagination">
+            <button class="s-table-pagination-button" (click)="previousPage()">
+                <div id="s-table-pagination-arrow-left" class="s-table-pagination-arrow"></div>
+            </button>
+            <div id="s-table-pagination-data">
+                <input 
+                    *ngIf="false" 
+                    class="s-table-pagination-data-input"
+                    [(ngModel)]="labelTotalElements" 
+                    disabled 
+                />
+                <input 
+                    class="s-table-pagination-data-input" 
+                    [(ngModel)]="labelActualPage" 
+                    disabled 
+                />
+                <input 
+                    *ngIf="false"  
+                    class="s-table-pagination-data-input"
+                    [(ngModel)]="labelTotalPages" 
+                    disabled 
+                />
+            </div>
+            <button class="s-table-pagination-button" (click)="nextPage()">
+                <div id="s-table-pagination-arrow-rigth" class="s-table-pagination-arrow"></div>
+            </button>
+        </section>
+    }
+</section>

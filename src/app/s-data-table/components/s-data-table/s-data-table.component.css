@@ -1,0 +1,148 @@
+#s-table-container {
+    box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+}
+
+#s-table-outer {
+    overflow: auto;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    max-height: 300px;
+    min-height: 300px;
+}
+
+#s-table-outer.no-pagination {
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+/* TABLE */
+
+#s-table {
+    text-align: center;
+    width: 100%;
+    border-spacing: 0px;
+    border-collapse: collapse;
+}
+
+#s-table-thead {
+    background-color: purple;
+    color: white;
+}
+
+#s-table-thead th {
+    background-color: purple;
+}
+
+#s-table tr {
+    transition: 0.5s all;
+}
+
+#s-table tr.clickable:hover {
+    cursor: pointer;
+}
+
+#s-table tr td {
+    border: 1px solid #dddddd;
+}
+
+.s-table-tr-hoverable:hover {
+    background-color: rgba(150, 150, 150, 0.15);
+}
+
+/* TABLE */
+
+/* TABLE PAGINATION */
+
+#s-table-pagination {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border: 1px solid #dddddd;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+#s-table-pagination-data {
+    width: 40%;
+    display: inherit;
+    justify-content: inherit;
+}
+
+#s-table-pagination-data input {
+    width: fit-content;
+}
+
+.s-table-pagination-data-input {
+    border-radius: 10px;
+    border: solid 0.5px #dddddd;
+    text-align: center;
+}
+
+.s-table-pagination-button {
+    background-color: transparent;
+    border: none;
+}
+
+.s-table-pagination-arrow {
+    width: 8px;
+    height: 8px;
+    transform: rotate(45deg);
+    transition: 0.5s all;
+}
+
+.s-table-pagination-button:hover .s-table-pagination-arrow {
+    width: 12px;
+    height: 12px;
+    cursor: pointer;
+}
+
+#s-table-pagination-arrow-left {
+    border-left: black solid 5px;
+    border-bottom: black solid 5px;
+  }
+
+  #s-table-pagination-arrow-rigth {
+    border-right: black solid 5px;
+    border-top: black solid 5px;
+  }
+
+
+/* TABLE PAGINATION */
+
+
+/* TABLE EXPANSION */
+
+    .s-table-td-full {
+        height: 0px;
+        display: none;
+        transition: 0.25s all;
+    }
+
+        .s-table-td-full.minimized {
+            display: table-cell;
+        }
+
+            .s-table-td-full.minimized .expandable-content {
+                height: 0;
+                padding-top: 0;
+                padding-bottom: 0;
+            }   
+
+            .s-table-td-full.visible .expandable-content{
+                height: 200px;
+                padding-top: 10px;
+                padding-bottom: 10px;
+            }
+
+
+    .expandable-content {
+        background-color: yellow;
+        height: 0px;
+        padding-top: 0px;
+        padding-bottom: 0px;
+        overflow: hidden;
+        transition: 0.25s all;
+    }
+
+/* TABLE EXPANSION */
